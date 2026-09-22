@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>הרשמה לאושפיקיבוץ - שבת 26/09</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: #f7f9f6; 
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .glass-header {
+            background: rgba(43, 108, 86, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-enter {
+            animation: slideUp 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kibbutz: {
+                            light: '#e8f0e9',
+                            main: '#2b6c56',
+                            dark: '#1b4a3a',
+                            accent: '#f2a65a', 
+                            text: '#2d3748'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="text-kibbutz-text antialiased pb-20">
+
+    <header class="glass-header text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-xl mx-auto px-5 py-4 text-center">
+            <h1 class="text-2xl font-bold tracking-tight mb-1">🌟 אושפיקיבוץ בגדות</h1>
+            <p class="text-sm font-medium text-green-100 flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                יום שבת, 26 בספטמבר
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-xl mx-auto px-4 pt-6 pb-8">
+        <div class="text-center mb-8">
+            <h2 class="text-xl font-bold text-kibbutz-dark mb-2">סדנאות חברי גדות</h2>
+            <p class="text-gray-600 text-sm leading-relaxed">
+                מוזמנים ומוזמנות ליום מלא בפעילויות, יצירה ותנועה.
+                <br>יש להירשם מראש לכל סדנא למטה.
+            </p>
+        </div>
+
+        <div id="workshops-container" class="space-y-4 mb-10">
+            <!-- Cards will be injected here -->
+        </div>
+
+        <div id="registration-section" class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-full h-2 bg-gradient-to-r from-kibbutz-main to-kibbutz-accent"></div>
+            
+            <h3 class="text-xl font-bold text-kibbutz-dark mb-4 text-center">הרשמה לסדנאות</h3>
+            
+            <form id="regForm" class="space-y-4" onsubmit="handleRegistration(event)">
+                <div>
+                    <label for="name" class="block text-sm font-semibold text-gray-700 mb-1">שם מלא</label>
+                    <input type="text" id="name" name="name" required placeholder="הכנס שם ושם משפחה" 
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-kibbutz-main focus:ring-2 focus:ring-kibbutz-main/20 outline-none transition-all text-base">
+                </div>
+                
+                <div>
+                    <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">מספר טלפון</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="05X-XXXXXXX" pattern="[0-9]{9,10}"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-kibbutz-main focus:ring-2 focus:ring-kibbutz-main/20 outline-none transition-all text-base">
+                </div>
+
+                <div>
+                    <label for="workshopSelect" class="block text-sm font-semibold text-gray-700 mb-1">בחירת סדנא</label>
+                    <select id="workshopSelect" name="workshop" required
+                            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-kibbutz-main focus:ring-2 focus:ring-kibbutz-main/20 outline-none transition-all bg-white appearance-none text-base">
+                        <option value="" disabled selected>טוען נתונים חיים...</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="participants" class="block text-sm font-semibold text-gray-700 mb-1">כמות משתתפים (כולל הורים אם רלוונטי)</label>
+                    <input type="number" id="participants" name="participants" min="1" required value="1"
+                           class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-kibbutz-main focus:ring-2 focus:ring-kibbutz-main/20 outline-none transition-all text-base">
+                </div>
+
+                <!-- חיווי שהסדנא מלאה - יופיע רק כשהסדנא מלאה -->
+                <div id="full-warning" class="hidden bg-orange-50 border border-orange-200 text-orange-800 p-4 rounded-xl mt-2 flex items-start gap-3">
+                    <svg class="w-6 h-6 shrink-0 mt-0.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    <div class="text-sm">
+                        <strong>הסדנא מלאה!</strong><br>
+                        ההרשמה כעת היא על בסיס מקום פנוי. ניצור קשר אם יתפנה מקום.
+                    </div>
+                </div>
+
+                <!-- אופציה רגילה להמתנה (כשהסדנא לא מלאה) -->
+                <div id="normal-waitlist-container" class="flex items-start gap-3 bg-gray-50 p-4 rounded-xl border border-gray-200 mt-2">
+                    <div class="flex items-center h-5">
+                        <input id="waitlist" name="waitlist" type="checkbox" value="כן"
+                               class="w-5 h-5 text-kibbutz-main bg-white border-gray-300 rounded focus:ring-kibbutz-main focus:ring-2 cursor-pointer">
+                    </div>
+                    <div class="text-sm">
+                        <label for="waitlist" class="font-medium text-gray-700 cursor-pointer">אופציה לרשימת המתנה</label>
+                        <p class="text-gray-500 text-xs mt-0.5">סמן/י כאן במידה ותהיו מעוניינים להצטרף כגיבוי במידה והסדנא תתמלא.</p>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn"
+                        class="w-full bg-kibbutz-main hover:bg-kibbutz-dark text-white font-bold text-lg py-4 rounded-xl transition-colors shadow-md mt-4 flex items-center justify-center gap-2">
+                    שליחת הרשמה
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <div id="successModal" class="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 px-4">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center transform scale-90 transition-transform duration-300" id="successModalContent">
+            <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">הרשמתך נקלטה!</h3>
+            <p class="text-gray-600 mb-6">הפרטים נשמרו בהצלחה. נתראה באושפיקיבוץ!</p>
+            <button onclick="closeModal()" class="bg-kibbutz-light text-kibbutz-dark font-bold py-3 px-8 rounded-xl hover:bg-gray-200 transition-colors w-full">
+                סגור
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzEgeWb2eofOvViNx8DbVrJX2i-AZ7M4u3VdoAhUCJVlDu-2Kq03xGY2YOQOyImQGvF-A/exec';
+        
+        // הגדרת הסדנאות והגבלת המקומות (Infinity אומר שאין הגבלה)
+        const workshops = [
+            { time: '10:00', title: 'ריקודי עם לקטנים ולגדולים', host: 'תיקי גור', location: 'רחבת העגלה / אולם הספורט', details: 'ללא הגבלת משתתפים.', icon: '🎵', max: Infinity },
+            { time: '11:30', title: 'הכנת מובייל מנדלה', host: 'רויטל זאבי', location: 'מרכז בי״ס סדנה', details: 'עד 15 ילדים בליווי הורה (החל מכיתה א׳).', icon: '🎨', max: 15 },
+            { time: '12:00', title: 'סדנת התססה מעשית', host: 'יובל יהודה', location: 'מועדון', details: 'עד 10 אנשים. חובה להביא: קרש חיתוך, סכין, קולפן.', icon: '🥒', max: 10 },
+            { time: '15:30', title: 'ציורים בלק ג׳ל (סבב א׳)', host: 'יעל משה', location: 'ספריית ילדים', details: 'עד 10 ילדים.', icon: '💅', max: 10 },
+            { time: '16:00', title: 'סדנת אוריגמי (א׳-ג׳)', host: 'שוש גורלובצקי', location: 'מועדון', details: 'ילדים א׳-ג׳, עד 8 משתתפים.', icon: '🦢', max: 8 },
+            { time: '17:00', title: 'סדנת אוריגמי (ד׳ ומעלה)', host: 'שוש גורלובצקי', location: 'מועדון', details: 'ילדים ד׳ ומעלה, עד 8 משתתפים.', icon: '🦢', max: 8 },
+            { time: '17:00', title: 'ציורים בלק ג׳ל (סבב ב׳)', host: 'יעל משה', location: 'ספריית ילדים', details: 'עד 10 ילדים.', icon: '💅', max: 10 },
+            { time: '18:00', title: 'צ׳יקונג', host: 'שירלי רייסמן', location: 'חמאר', details: 'מיועד למבוגרים.', icon: '🧘', max: Infinity },
+            { time: '18:00', title: 'הכנת פרחים ממנקי מקטרות', host: 'אורית ויערה נאור', location: 'בית משפחת נאור', details: 'מוזמנים בשמחה.', icon: '🌸', max: Infinity }
+        ];
+
+        let registeredCounts = {};
+
+        // מאזין לטעינת הדף
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCards();
+            fetchRegistrationCounts(); // בקשת נתונים בזמן אמת מגוגל
+        });
+
+        function renderCards() {
+            const container = document.getElementById('workshops-container');
+            workshops.forEach((ws, index) => {
+                const card = document.createElement('div');
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.className = 'card-enter bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex flex-col gap-3 relative overflow-hidden';
+                
+                card.innerHTML = `
+                    <div class="absolute right-0 top-0 bottom-0 w-1.5 bg-kibbutz-main opacity-80 rounded-r-2xl"></div>
+                    <div class="flex justify-between items-start pr-2">
+                        <div>
+                            <span class="inline-block bg-kibbutz-light text-kibbutz-dark font-bold text-sm px-3 py-1 rounded-full mb-2">🕒 ${ws.time}</span>
+                            <h3 class="text-lg font-bold text-gray-900 leading-tight"><span class="text-xl ml-1">${ws.icon}</span>${ws.title}</h3>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 pr-2 mt-1">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="font-medium mr-1">מנחה:</span> ${ws.host}
+                        </div>
+                        <div class="flex items-center text-sm text-gray-600">
+                            <span class="font-medium mr-1">מיקום:</span> ${ws.location}
+                        </div>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-100 rounded-lg p-3 mt-2 pr-3">
+                        <div class="flex items-start text-xs text-orange-800"><span>${ws.details}</span></div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function fetchRegistrationCounts() {
+            try {
+                const response = await fetch(scriptURL);
+                if (response.ok) {
+                    registeredCounts = await response.json();
+                }
+            } catch (error) {
+                console.log("Could not load real-time counts, falling back to default.", error);
+            }
+            updateDropdown();
+        }
+
+        function updateDropdown() {
+            const selectDropdown = document.getElementById('workshopSelect');
+            selectDropdown.innerHTML = '<option value="" disabled selected>בחר/י סדנא מהרשימה...</option>';
+
+            workshops.forEach((ws) => {
+                const optionId = `${ws.time} - ${ws.title}`;
+                // משיכת כמות הרשומים מהשרת (או 0 אם לא התקבל)
+                const count = registeredCounts[optionId] || 0; 
+                
+                const option = document.createElement('option');
+                option.value = optionId;
+                
+                if (ws.max === Infinity) {
+                    option.textContent = `${ws.time} | ${ws.title} (ללא הגבלה)`;
+                } else if (count >= ws.max) {
+                    // הסדנא מלאה
+                    option.textContent = `${ws.time} | ${ws.title} - מלא! (הרשמה להמתנה בלבד)`;
+                    option.dataset.full = "true";
+                } else {
+                    // יש מקום
+                    const remaining = ws.max - count;
+                    option.textContent = `${ws.time} | ${ws.title} - נותרו ${remaining} מקומות`;
+                }
+
+                selectDropdown.appendChild(option);
+            });
+        }
+
+        // האזנה לשינוי בחירה - החלפת תצוגת ההמתנה
+        document.getElementById('workshopSelect').addEventListener('change', function(e) {
+            const selectedOption = e.target.options[e.target.selectedIndex];
+            const fullWarning = document.getElementById('full-warning');
+            const normalWaitlist = document.getElementById('normal-waitlist-container');
+            
+            if (selectedOption.dataset.full === "true") {
+                fullWarning.classList.remove('hidden');
+                normalWaitlist.classList.add('hidden');
+            } else {
+                fullWarning.classList.add('hidden');
+                normalWaitlist.classList.remove('hidden');
+            }
+        });
+
+        function handleRegistration(e) {
+            e.preventDefault();
+            
+            const form = document.getElementById('regForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const originalBtnContent = submitBtn.innerHTML;
+            
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `שולח נתונים...`;
+            submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+
+            const formData = new FormData(form);
+            const select = document.getElementById('workshopSelect');
+            const selectedOption = select.options[select.selectedIndex];
+            const isFull = selectedOption.dataset.full === "true";
+            const wantsOptionalWaitlist = formData.get('waitlist');
+            
+            const currentWorkshop = formData.get('workshop');
+            
+            // תיוג אוטומטי לרשימת המתנה אם מלא, או אם המשתמש סימן את התיבה
+            if (isFull) {
+                formData.set('workshop', currentWorkshop + ' [רשימת המתנה]');
+            } else if (wantsOptionalWaitlist) {
+                formData.set('workshop', currentWorkshop + ' [אופציה להמתנה במקרה של חוסר מקום]');
+            }
+            formData.delete('waitlist');
+
+            fetch(scriptURL, { method: 'POST', body: formData})
+                .then(response => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnContent;
+                    submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+                    
+                    const modal = document.getElementById('successModal');
+                    const modalContent = document.getElementById('successModalContent');
+                    modal.classList.remove('opacity-0', 'pointer-events-none');
+                    modalContent.classList.remove('scale-90');
+                    modalContent.classList.add('scale-100');
+                    
+                    form.reset(); 
+                    document.getElementById('full-warning').classList.add('hidden');
+                    document.getElementById('normal-waitlist-container').classList.remove('hidden');
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert('הייתה בעיה בשליחת ההרשמה. אנא נסו שוב.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnContent;
+                    submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+                });
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            const modalContent = document.getElementById('successModalContent');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-90');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+    </script>
+</body>
+</html>
