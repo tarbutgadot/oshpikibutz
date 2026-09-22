@@ -106,7 +106,7 @@
                 </div>
 
                 <div>
-                    <label for="participants" class="block text-sm font-semibold text-gray-700 mb-1">כמות משתתפים (כולל הורים אם רלוונטי)</label>
+                    <label for="participants" class="block text-sm font-semibold text-gray-700 mb-1">כמות משתתפים</label>
                     <input type="number" id="participants" name="participants" min="1" required value="1"
                            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-kibbutz-main focus:ring-2 focus:ring-kibbutz-main/20 outline-none transition-all text-base">
                 </div>
@@ -116,19 +116,7 @@
                     <svg class="w-6 h-6 shrink-0 mt-0.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                     <div class="text-sm">
                         <strong>הסדנא מלאה!</strong><br>
-                        ההרשמה כעת היא על בסיס מקום פנוי. ניצור קשר אם יתפנה מקום.
-                    </div>
-                </div>
-
-                <!-- אופציה רגילה להמתנה (כשהסדנא לא מלאה) -->
-                <div id="normal-waitlist-container" class="flex items-start gap-3 bg-gray-50 p-4 rounded-xl border border-gray-200 mt-2">
-                    <div class="flex items-center h-5">
-                        <input id="waitlist" name="waitlist" type="checkbox" value="כן"
-                               class="w-5 h-5 text-kibbutz-main bg-white border-gray-300 rounded focus:ring-kibbutz-main focus:ring-2 cursor-pointer">
-                    </div>
-                    <div class="text-sm">
-                        <label for="waitlist" class="font-medium text-gray-700 cursor-pointer">אופציה לרשימת המתנה</label>
-                        <p class="text-gray-500 text-xs mt-0.5">סמן/י כאן במידה ותהיו מעוניינים להצטרף כגיבוי במידה והסדנא תתמלא.</p>
+                        ההרשמה כעת היא לרשימת המתנה. במידה ויתפנה מקום ניצור קשר.
                     </div>
                 </div>
 
@@ -168,7 +156,7 @@
             { time: '17:00', title: 'סדנת אוריגמי (ד׳ ומעלה)', host: 'שוש גורלובצקי', location: 'מועדון', details: 'ילדים ד׳ ומעלה, עד 8 משתתפים.', icon: '🦢', max: 8 },
             { time: '17:00', title: 'ציורים בלק ג׳ל (סבב ב׳)', host: 'יעל משה', location: 'ספריית ילדים', details: 'עד 10 ילדים.', icon: '💅', max: 10 },
             { time: '18:00', title: 'צ׳יקונג', host: 'שירלי רייסמן', location: 'חמאר', details: 'מיועד למבוגרים.', icon: '🧘', max: Infinity },
-            { time: '18:00', title: 'הכנת פרחים ממנקי מקטרות', host: 'אורית ויערה נאור', location: 'בית משפחת נאור', details: 'מוזמנים בשמחה.', icon: '🌸', max: Infinity }
+            { time: '18:00', title: 'הכנת פרחים ממנקי מקטרות', host: 'אורית ויערה נאור', location: 'בית משפחת נאור', details: '10 ילדים מכיתה ג׳, בליווי הורה.', icon: '🌸', max: 10 }
         ];
 
         let registeredCounts = {};
@@ -254,14 +242,11 @@
         document.getElementById('workshopSelect').addEventListener('change', function(e) {
             const selectedOption = e.target.options[e.target.selectedIndex];
             const fullWarning = document.getElementById('full-warning');
-            const normalWaitlist = document.getElementById('normal-waitlist-container');
             
             if (selectedOption.dataset.full === "true") {
                 fullWarning.classList.remove('hidden');
-                normalWaitlist.classList.add('hidden');
             } else {
                 fullWarning.classList.add('hidden');
-                normalWaitlist.classList.remove('hidden');
             }
         });
 
@@ -280,17 +265,13 @@
             const select = document.getElementById('workshopSelect');
             const selectedOption = select.options[select.selectedIndex];
             const isFull = selectedOption.dataset.full === "true";
-            const wantsOptionalWaitlist = formData.get('waitlist');
             
             const currentWorkshop = formData.get('workshop');
             
-            // תיוג אוטומטי לרשימת המתנה אם מלא, או אם המשתמש סימן את התיבה
+            // תיוג אוטומטי לרשימת המתנה אם מלא
             if (isFull) {
                 formData.set('workshop', currentWorkshop + ' [רשימת המתנה]');
-            } else if (wantsOptionalWaitlist) {
-                formData.set('workshop', currentWorkshop + ' [אופציה להמתנה במקרה של חוסר מקום]');
             }
-            formData.delete('waitlist');
 
             fetch(scriptURL, { method: 'POST', body: formData})
                 .then(response => {
@@ -306,7 +287,6 @@
                     
                     form.reset(); 
                     document.getElementById('full-warning').classList.add('hidden');
-                    document.getElementById('normal-waitlist-container').classList.remove('hidden');
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
