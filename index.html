@@ -56,9 +56,9 @@
 
     <header class="glass-header text-white sticky top-0 z-50 shadow-md">
         <div class="max-w-xl mx-auto px-5 py-6 text-center">
-            <h1 class="text-4xl font-extrabold tracking-tight mb-3">🌟 אושפיקיבוץ בגדות</h1>
-            <p class="text-xl font-bold text-green-100 flex items-center justify-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-3">🌟 אושפיקיבוץ בגדות</h1>
+            <p class="text-2xl font-bold text-green-100 flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 יום שבת, 26 בספטמבר
@@ -68,8 +68,8 @@
 
     <main class="max-w-xl mx-auto px-4 pt-8 pb-10">
         <div class="text-center mb-10">
-            <h2 class="text-3xl font-extrabold text-kibbutz-dark mb-4">סדנאות חברי גדות</h2>
-            <p class="text-gray-700 text-xl leading-relaxed font-bold">
+            <h2 class="text-4xl font-extrabold text-kibbutz-dark mb-4">סדנאות חברי גדות</h2>
+            <p class="text-gray-700 text-2xl leading-relaxed font-bold">
                 מוזמנים ומוזמנות ליום מלא בפעילויות, יצירה ותנועה.
                 <br>יש להירשם מראש לכל סדנא למטה.
             </p>
@@ -82,46 +82,46 @@
         <div id="registration-section" class="bg-white rounded-3xl shadow-xl border border-gray-100 p-6 sm:p-10 relative overflow-hidden">
             <div class="absolute top-0 right-0 w-full h-3 bg-gradient-to-r from-kibbutz-main to-kibbutz-accent"></div>
             
-            <h3 class="text-3xl font-extrabold text-kibbutz-dark mb-8 text-center">הרשמה לסדנאות</h3>
+            <h3 class="text-4xl font-extrabold text-kibbutz-dark mb-8 text-center">הרשמה לסדנאות</h3>
             
-            <form id="regForm" class="space-y-6" onsubmit="handleRegistration(event)">
+            <form id="regForm" class="space-y-8" onsubmit="handleRegistration(event)">
                 <div>
-                    <label for="name" class="block text-xl font-bold text-gray-800 mb-3">שם מלא</label>
+                    <label for="name" class="block text-2xl font-bold text-gray-800 mb-3">שם מלא</label>
                     <input type="text" id="name" name="name" required placeholder="הכנס שם ושם משפחה" 
-                           class="w-full px-5 py-4 rounded-2xl border-2 border-gray-300 focus:border-kibbutz-main focus:ring-4 focus:ring-kibbutz-main/20 outline-none transition-all text-xl font-medium">
+                           class="w-full px-5 py-4 rounded-2xl border-2 border-gray-300 focus:border-kibbutz-main focus:ring-4 focus:ring-kibbutz-main/20 outline-none transition-all text-2xl font-medium">
                 </div>
                 
                 <div>
-                    <label for="phone" class="block text-xl font-bold text-gray-800 mb-3">מספר טלפון</label>
+                    <label for="phone" class="block text-2xl font-bold text-gray-800 mb-3">מספר טלפון</label>
                     <input type="tel" id="phone" name="phone" required placeholder="05X-XXXXXXX" pattern="[0-9]{9,10}"
-                           class="w-full px-5 py-4 rounded-2xl border-2 border-gray-300 focus:border-kibbutz-main focus:ring-4 focus:ring-kibbutz-main/20 outline-none transition-all text-xl font-medium">
+                           class="w-full px-5 py-4 rounded-2xl border-2 border-gray-300 focus:border-kibbutz-main focus:ring-4 focus:ring-kibbutz-main/20 outline-none transition-all text-2xl font-medium">
                 </div>
 
                 <div>
-                    <label for="workshopSelect" class="block text-xl font-bold text-gray-800 mb-3">בחירת סדנא</label>
+                    <label for="workshopSelect" class="block text-2xl font-bold text-gray-800 mb-3">בחירת סדנא</label>
                     <select id="workshopSelect" name="workshop" required
-                            class="w-full px-5 py-4 rounded-2xl border-2 border-gray-300 focus:border-kibbutz-main focus:ring-4 focus:ring-kibbutz-main/20 outline-none transition-all bg-white appearance-none text-xl font-medium">
+                            class="w-full px-5 py-4 rounded-2xl border-2 border-gray-300 focus:border-kibbutz-main focus:ring-4 focus:ring-kibbutz-main/20 outline-none transition-all bg-white appearance-none text-2xl font-bold text-kibbutz-dark">
                         <option value="" disabled selected>טוען נתונים חיים...</option>
                     </select>
                 </div>
 
                 <div>
-                    <label for="participants" class="block text-xl font-bold text-gray-800 mb-3">כמות משתתפים</label>
+                    <label for="participants" class="block text-2xl font-bold text-gray-800 mb-3">כמות משתתפים</label>
                     <input type="number" id="participants" name="participants" min="1" required value="1"
-                           class="w-full px-5 py-4 rounded-2xl border-2 border-gray-300 focus:border-kibbutz-main focus:ring-4 focus:ring-kibbutz-main/20 outline-none transition-all text-xl font-medium">
+                           class="w-full px-5 py-4 rounded-2xl border-2 border-gray-300 focus:border-kibbutz-main focus:ring-4 focus:ring-kibbutz-main/20 outline-none transition-all text-2xl font-medium">
                 </div>
 
                 <!-- חיווי שהסדנא מלאה -->
-                <div id="full-warning" class="hidden bg-orange-50 border-2 border-orange-200 text-orange-900 p-5 rounded-2xl mt-6 flex items-start gap-4">
-                    <svg class="w-8 h-8 shrink-0 mt-0.5 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                    <div class="text-lg font-bold">
-                        <strong class="text-xl">הסדנא מלאה!</strong><br>
-                        ההרשמה כעת היא לרשימת המתנה. במידה ויתפנה מקום ניצור קשר.
+                <div id="full-warning" class="hidden bg-orange-50 border-2 border-orange-200 text-orange-900 p-5 rounded-2xl mt-6 flex items-start gap-4 shadow-sm">
+                    <svg class="w-10 h-10 shrink-0 mt-1 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                    <div class="text-xl font-bold leading-tight">
+                        <strong class="text-2xl text-orange-700 block mb-1">הסדנא מלאה!</strong>
+                        ההרשמה כעת היא על בסיס מקום פנוי <span class="underline">(רשימת המתנה)</span>. במידה ויתפנה מקום ניצור קשר.
                     </div>
                 </div>
 
                 <button type="submit" id="submitBtn"
-                        class="w-full bg-kibbutz-main hover:bg-kibbutz-dark text-white font-extrabold text-2xl py-5 rounded-2xl transition-colors shadow-lg mt-8 flex items-center justify-center gap-3">
+                        class="w-full bg-kibbutz-main hover:bg-kibbutz-dark text-white font-extrabold text-3xl py-6 rounded-2xl transition-colors shadow-lg mt-8 flex items-center justify-center gap-3">
                     שליחת הרשמה
                 </button>
             </form>
@@ -135,68 +135,90 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                 </svg>
             </div>
-            <h3 class="text-3xl font-extrabold text-gray-800 mb-3">הרשמתך נקלטה!</h3>
-            <p class="text-xl text-gray-700 mb-8 font-bold">הפרטים נשמרו בהצלחה. נתראה באושפיקיבוץ!</p>
-            <button onclick="closeModal()" class="bg-kibbutz-light text-kibbutz-dark font-extrabold text-xl py-4 px-8 rounded-2xl hover:bg-gray-200 transition-colors w-full">
+            <h3 class="text-4xl font-extrabold text-gray-800 mb-4">הרשמתך נקלטה!</h3>
+            <p class="text-2xl text-gray-700 mb-8 font-bold">הפרטים נשמרו בהצלחה. נתראה באושפיקיבוץ!</p>
+            <button onclick="closeModal()" class="bg-kibbutz-light text-kibbutz-dark font-extrabold text-2xl py-4 px-8 rounded-2xl hover:bg-gray-200 transition-colors w-full shadow-sm">
                 סגור
             </button>
         </div>
     </div>
 
     <script>
+        // הכתובת המעודכנת של ה-Google Sheet שלך
         const scriptURL = 'https://script.google.com/macros/s/AKfycbzEgeWb2eofOvViNx8DbVrJX2i-AZ7M4u3VdoAhUCJVlDu-2Kq03xGY2YOQOyImQGvF-A/exec';
         
+        // רשימת הסדנאות - שימו לב למשתנה isConditionalOn שמגדיר תלות בסדנא אחרת
         const workshops = [
             { time: '10:00', title: 'ריקודי עם לקטנים ולגדולים', host: 'תיקי גור', location: 'רחבת העגלה / אולם הספורט', details: 'ללא הגבלת משתתפים.', icon: '🎵', max: Infinity },
             { time: '11:30', title: 'הכנת מובייל מנדלה', host: 'רויטל זאבי', location: 'מרכז בי״ס סדנה', details: 'עד 15 ילדים בליווי הורה (החל מכיתה א׳).', icon: '🎨', max: 15 },
-            { time: '12:00', title: 'סדנת התססה מעשית', host: 'יובל יהודה', location: 'מועדון', details: 'עד 10 אנשים. חובה להביא: קרש חיתוך, סכין, קולפן.', icon: '🥒', max: 10 },
+            { time: '12:00', title: 'סדנת התססה מעשית', host: 'יובל יהודה', location: 'מועדון', details: 'עד 10 אנשים.<br><span class="text-red-600">חובה להביא: קרש חיתוך, סכין וקולפן.</span>', icon: '🥒', max: 10 },
             { time: '15:30', title: 'ציורים בלק ג׳ל (סבב א׳)', host: 'יעל משה', location: 'מרכז בי״ס סדנה', details: 'עד 10 ילדים.', icon: '💅', max: 10 },
             { time: '16:00', title: 'סדנת אוריגמי (א׳-ג׳)', host: 'שוש גורלובצקי', location: 'מועדון', details: 'ילדים א׳-ג׳, עד 8 משתתפים.', icon: '🦢', max: 8 },
             { time: '17:00', title: 'סדנת אוריגמי (ד׳ ומעלה)', host: 'שוש גורלובצקי', location: 'מועדון', details: 'ילדים ד׳ ומעלה, עד 8 משתתפים.', icon: '🦢', max: 8 },
-            { time: '17:00', title: 'ציורים בלק ג׳ל (סבב ב׳)', host: 'יעל משה', location: 'מרכז בי״ס סדנה', details: 'עד 10 ילדים.', icon: '💅', max: 10 },
+            
+            // סבב ב' מותנה בהתמלאות סבב א'
+            { time: '17:00', title: 'ציורים בלק ג׳ל (סבב ב׳)', host: 'יעל משה', location: 'מרכז בי״ס סדנה', details: 'עד 10 ילדים. סבב זה נפתח לרישום לפי דרישה!', icon: '💅', max: 10, isConditionalOn: '15:30 - ציורים בלק ג׳ל (סבב א׳)' },
+            
             { time: '18:00', title: 'צ׳יקונג', host: 'שירלי רייסמן', location: 'חמאר', details: 'מיועד למבוגרים.', icon: '🧘', max: Infinity },
-            { time: '18:00', title: 'הכנת פרחים ממנקי מקטרות', host: 'אורית ויערה נאור', location: 'בית משפחת נאור', details: '10 ילדים מכיתה ג׳, בליווי הורה.', icon: '🌸', max: 10 }
+            { time: '18:00', title: 'הכנת פרחים ממנקי מקטרות', host: 'אורית ויערה נאור', location: 'בית משפחת נאור', details: 'עד 10 ילדים, מכיתה ג׳ ובליווי הורה.', icon: '🌸', max: 10 }
         ];
 
         let registeredCounts = {};
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderCards();
-            fetchRegistrationCounts(); 
+            renderCards(); // ציור ראשוני (יסתיר את סבב ב' כי עדיין לא טענו נתונים)
+            updateDropdown();
+            fetchRegistrationCounts(); // טעינת נתונים אמיתיים
         });
 
         function renderCards() {
             const container = document.getElementById('workshops-container');
-            workshops.forEach((ws, index) => {
+            container.innerHTML = ''; // מנקה את הרשימה כדי לצייר מחדש
+            let visibleIndex = 0;
+
+            workshops.forEach((ws) => {
+                // בדיקה אם הסדנא תלויה בסדנא אחרת (כמו סבב ב' של יעל)
+                if (ws.isConditionalOn) {
+                    const parentCount = registeredCounts[ws.isConditionalOn] || 0;
+                    const parentWorkshop = workshops.find(w => `${w.time} - ${w.title}` === ws.isConditionalOn);
+                    
+                    // אם הסדנא הראשונה עדיין לא מלאה - אל תציג את הסדנא הזו בכלל
+                    if (!parentWorkshop || parentCount < parentWorkshop.max) {
+                        return; 
+                    }
+                }
+
                 const card = document.createElement('div');
-                card.style.animationDelay = `${index * 0.1}s`;
+                card.style.animationDelay = `${visibleIndex * 0.1}s`;
                 card.className = 'card-enter bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-gray-100 flex flex-col gap-4 relative overflow-hidden';
                 
+                let highlightClass = ws.isConditionalOn ? 'bg-yellow-50 border-yellow-200' : 'bg-green-50 border-green-100';
+
                 card.innerHTML = `
-                    <div class="absolute right-0 top-0 bottom-0 w-2.5 bg-kibbutz-main opacity-80 rounded-r-3xl"></div>
+                    <div class="absolute right-0 top-0 bottom-0 w-3 bg-kibbutz-main opacity-90 rounded-r-3xl"></div>
                     <div class="flex flex-col sm:flex-row gap-5 items-start pr-3">
-                        <!-- תמונת/אייקון הסדנא מוגדל -->
-                        <div class="flex-shrink-0 w-24 h-24 bg-green-50 border-2 border-green-100 rounded-3xl flex items-center justify-center text-6xl shadow-sm self-start">
+                        <div class="flex-shrink-0 w-28 h-28 ${highlightClass} border-2 rounded-3xl flex items-center justify-center text-7xl shadow-sm self-start">
                             ${ws.icon}
                         </div>
                         <div class="flex-1 mt-2 sm:mt-0">
-                            <span class="inline-block bg-kibbutz-light text-kibbutz-dark font-extrabold text-lg px-4 py-1.5 rounded-full mb-3 shadow-sm border border-green-200">🕒 ${ws.time}</span>
-                            <h3 class="text-2xl sm:text-3xl font-black text-gray-900 leading-tight mb-2">${ws.title}</h3>
+                            <span class="inline-block bg-kibbutz-light text-kibbutz-dark font-extrabold text-xl px-5 py-2 rounded-full mb-3 shadow-sm border border-green-200 tracking-wide">🕒 ${ws.time}</span>
+                            <h3 class="text-3xl sm:text-4xl font-black text-gray-900 leading-tight mb-3">${ws.title}</h3>
                         </div>
                     </div>
-                    <div class="space-y-3 pr-3 mt-2 sm:mt-4">
-                        <div class="flex items-center text-xl text-gray-700">
-                            <span class="font-extrabold mr-2 text-gray-900">מנחה:</span> <span class="font-medium">${ws.host}</span>
+                    <div class="space-y-4 pr-3 mt-4">
+                        <div class="flex items-center text-2xl text-gray-800">
+                            <span class="font-extrabold mr-2 text-kibbutz-main">👤 מנחה:</span> <span class="font-bold">${ws.host}</span>
                         </div>
-                        <div class="flex items-center text-xl text-gray-700">
-                            <span class="font-extrabold mr-2 text-gray-900">מיקום:</span> <span class="font-medium">${ws.location}</span>
+                        <div class="flex items-center text-2xl text-gray-800">
+                            <span class="font-extrabold mr-2 text-kibbutz-main">📍 מיקום:</span> <span class="font-bold">${ws.location}</span>
                         </div>
                     </div>
-                    <div class="bg-orange-50 border-2 border-orange-100 rounded-2xl p-5 mt-4 pr-4 shadow-inner">
-                        <div class="flex items-start text-xl font-bold text-orange-900 leading-relaxed"><span>${ws.details}</span></div>
+                    <div class="bg-orange-50 border-2 border-orange-100 rounded-2xl p-5 mt-5 pr-4 shadow-inner">
+                        <div class="flex items-start text-2xl font-extrabold text-orange-900 leading-relaxed"><span>${ws.details}</span></div>
                     </div>
                 `;
                 container.appendChild(card);
+                visibleIndex++;
             });
         }
 
@@ -209,6 +231,9 @@
             } catch (error) {
                 console.log("Could not load real-time counts, falling back to default.", error);
             }
+            
+            // לאחר שהנתונים מתקבלים, מציירים מחדש כדי לחשוף סדנאות מותנות במידת הצורך
+            renderCards(); 
             updateDropdown();
         }
 
@@ -217,6 +242,15 @@
             selectDropdown.innerHTML = '<option value="" disabled selected>בחר/י סדנא מהרשימה...</option>';
 
             workshops.forEach((ws) => {
+                // בדיקת תלות (כמו סבב ב' של יעל) - מסתיר מהטופס אם לא רלוונטי
+                if (ws.isConditionalOn) {
+                    const parentCount = registeredCounts[ws.isConditionalOn] || 0;
+                    const parentWorkshop = workshops.find(w => `${w.time} - ${w.title}` === ws.isConditionalOn);
+                    if (!parentWorkshop || parentCount < parentWorkshop.max) {
+                        return; 
+                    }
+                }
+
                 const optionId = `${ws.time} - ${ws.title}`;
                 const count = registeredCounts[optionId] || 0; 
                 
@@ -224,7 +258,7 @@
                 option.value = optionId;
                 
                 if (ws.max === Infinity) {
-                    option.textContent = `${ws.time} | ${ws.title} (ללא הגבלה)`;
+                    option.textContent = `${ws.time} | ${ws.title} (פתוח לכולם)`;
                 } else if (count >= ws.max) {
                     option.textContent = `${ws.time} | ${ws.title} - מלא! (הרשמה להמתנה בלבד)`;
                     option.dataset.full = "true";
@@ -256,7 +290,7 @@
             const originalBtnContent = submitBtn.innerHTML;
             
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `שולח נתונים...`;
+            submitBtn.innerHTML = `שולח נתונים... <svg class="animate-spin mr-3 h-6 w-6 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
             submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
 
             const formData = new FormData(form);
@@ -266,6 +300,7 @@
             
             const currentWorkshop = formData.get('workshop');
             
+            // הוספת תווית אוטומטית אם הסדנא מלאה
             if (isFull) {
                 formData.set('workshop', currentWorkshop + ' [רשימת המתנה]');
             }
@@ -284,6 +319,9 @@
                     
                     form.reset(); 
                     document.getElementById('full-warning').classList.add('hidden');
+                    
+                    // רענון המספרים לאחר הרשמה מוצלחת כדי לראות אם משהו התמלא ונפתח
+                    fetchRegistrationCounts();
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
